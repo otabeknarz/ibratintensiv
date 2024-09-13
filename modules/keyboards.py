@@ -11,28 +11,29 @@ class Buttons:
         self.main_markup = ReplyKeyboardMarkup(
             keyboard=[
                 [KeyboardButton(text="🔗 Havola olish")],
-                [KeyboardButton(text="📄 Shaxsiy kabinet")]
+                [KeyboardButton(text="📄 Shaxsiy kabinet")],
             ],
-            resize_keyboard=True
+            resize_keyboard=True,
         )
 
 
-class InlineButtons:
-    def __init__(self):
-        self.channel_markup = InlineKeyboardMarkup(
-            inline_keyboard=[
-                [
-                    InlineKeyboardButton(
-                        text="KANALGA O'TISH",
-                        url="https://t.me/+dAUHD6dKTrxmMGEy",
-                        callback_data="channel",
-                    )
-                ],
-                [
-                    InlineKeyboardButton(
-                        text="Tekshirish",
-                        callback_data="subscribed",
-                    )
-                ]
-            ]
-        )
+def get_channel_markup(friend_id: str | int | None) -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text="KANALGA O'TISH",
+                    url="https://t.me/+dAUHD6dKTrxmMGEy",
+                    callback_data="channel",
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    text="Tekshirish",
+                    callback_data=(
+                        f"subscribed:{friend_id}" if friend_id else "subscribed"
+                    ),
+                )
+            ],
+        ]
+    )
