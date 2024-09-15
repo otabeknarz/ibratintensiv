@@ -37,3 +37,10 @@ def get_channel_markup(friend_id: str | int | None) -> InlineKeyboardMarkup:
             ],
         ]
     )
+
+def get_ready_markup():
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [InlineKeyboardButton(text="✅ Tayyorman", callback_data="ready")]
+        ]
+    )
