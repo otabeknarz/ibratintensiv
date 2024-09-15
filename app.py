@@ -118,6 +118,13 @@ O'yin sharti : Ingliz tiliga qiziqqan do'stlaringizni INTENSIVga taklif qilish.
 - Samarali LUG'AT yodlash metodikasi
 - Iskandar Komoldinov bilan JONLI UCHRASHUV va NONUSHTA 
 
+🔰300 ta taklif :
+
+- IELTS 7+ uchun STUDY PLAN qo'llanmasi
+- Sheriksiz SPEAKING chiqarish usullari darsi
+- Samarali LUG'AT yodlash metodikasi
+- English BOOTCAMP kursida qatnashish
+
 🔰500 ta taklif :
 
  - IELTS 7+ uchun STUDY PLAN qo'llanmasi
@@ -127,7 +134,7 @@ O'yin sharti : Ingliz tiliga qiziqqan do'stlaringizni INTENSIVga taklif qilish.
 - Iskandar Komoldinov tomonidan Londondan sovg'a 
 
 
-❗️DIQQAT : Sovg'alar 27-sentyabrdan so'ng egalariga topshiriladi.
+❗️DIQQAT : Sovg'alar INTENSIVdan so'ng egalariga topshiriladi☺️
 
 Sovg'ali o'yinda qatnashish uchun MAXSUS havola olishingiz kerak. Boshlashga tayyormisiz ?
                 """,
