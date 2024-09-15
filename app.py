@@ -86,30 +86,48 @@ async def check_subs_callback(callback: types.CallbackQuery):
                     f"""
 🇬🇧Yaqinlaringiz til o'rganishiga sababchi bo'ling va sovg'alarni yutib oling🤩
 
-
 O'yin sharti : Ingliz tiliga qiziqqan do'stlaringizni INTENSIVga taklif qilish.
 
 📌G'oliblarni taklif qilgan do'stlar soniga ko'ra aniqlaymiz.
 
-🔥SOVG'ALAR bilan tanishing : 
+🔥SOVG'ALAR bilan tanishing 🤩
 
-🔰10 ta taklif : IELTS 7+ uchun STUDY PLAN qo'llanmasi
+🔰10 ta taklif : 
+- IELTS 7+ uchun STUDY PLAN qo'llanmasi
 
-🔰50 ta taklif - Ibrat Farzandlari loyihasi ofisiga  tur
+🔰20 ta taklif : 
+- IELTS 7+ uchun STUDY PLAN qo'llanmasi
+- Sheriksiz SPEAKING chiqarish usullari darsi
 
-🔰100 ta taklif - Ibrat Farzandlari maxsus sovg'asi (daftar, ruchka, kepka) yoki kitob
+🔰50 ta taklif :
+- IELTS 7+ uchun STUDY PLAN qo'llanmasi
+- Sheriksiz SPEAKING chiqarish usullari darsi
+- Samarali LUG'AT yodlash metodikasi
 
-🔰200 ta taklif - Ibrat Farzandlari futbolkasi
+🔰100 ta taklif :
 
-🔰300 ta taklif - Iskandar Komoldinov bilan JONLI UCHRASHUV va NONUSHTA 
-
-🔰500 ta taklif - Ibrat Farzandlari jamoasiga qo'shilish
-
-🔰700 ta taklif - Iskandar Komoldinov tomonidan Londondan sovg'a 
-
+- IELTS 7+ uchun STUDY PLAN qo'llanmasi
+- Sheriksiz SPEAKING chiqarish usullari darsi
+- Samarali LUG'AT yodlash metodikasi
+- Ibrat Farzandlari loyihasidan maxsus sovg'a 
 
 
-❗️DIQQAT : Sovg'alar intensivdan so'ng egalariga topshiriladi.
+🔰200 ta taklif :
+- IELTS 7+ uchun STUDY PLAN qo'llanmasi
+- Sheriksiz SPEAKING chiqarish usullari darsi
+- Samarali LUG'AT yodlash metodikasi
+- Iskandar Komoldinov bilan JONLI UCHRASHUV va NONUSHTA 
+
+🔰500 ta taklif :
+
+ - IELTS 7+ uchun STUDY PLAN qo'llanmasi
+- Sheriksiz SPEAKING chiqarish usullari darsi
+- Samarali LUG'AT yodlash metodikasi
+- Iskandar Komoldinov bilan JONLI UCHRASHUV va NONUSHTA 
+- Iskandar Komoldinov tomonidan Londondan sovg'a 
+
+
+❗️DIQQAT : Sovg'alar 27-sentyabrdan so'ng egalariga topshiriladi.
 
 Sovg'ali o'yinda qatnashish uchun MAXSUS havola olishingiz kerak. Boshlashga tayyormisiz ?
                 """,
