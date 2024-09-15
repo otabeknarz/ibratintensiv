@@ -2,7 +2,7 @@ import asyncio
 import logging
 import sys
 
-from aiogram import Bot, Dispatcher, html
+from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart, CommandObject
@@ -11,7 +11,7 @@ from aiogram import types
 
 from modules.filters import TextEqualsFilter
 from modules.settings import get_settings
-from modules.keyboards import Buttons, get_channel_markup
+from modules.keyboards import Buttons, get_channel_markup, get_ready_markup
 from modules import functions
 
 bot_settings = get_settings()
@@ -46,40 +46,8 @@ So'ng “✅ Obuna bo'ldim” tugmasini bosing shunda shartlarni to'liq bajargan
             message.chat.id,
             buff_photo,
             caption=caption,
+            reply_markup=get_channel_markup(command.args)
         )
-
-    await message.answer(
-        f"""
-    🇬🇧Yaqinlaringiz til o'rganishiga sababchi bo'ling va sovg'alarni yutib oling🤩
-
-
-    O'yin sharti : Ingliz tiliga qiziqqan do'stlaringizni INTENSIVga taklif qilish.
-    
-    📌G'oliblarni taklif qilgan do'stlar soniga ko'ra aniqlaymiz.
-    
-    🔥SOVG'ALAR bilan tanishing : 
-    
-    🔰1000 ta taklif - Iskandar Kamoliddonov tomonidan Londondan sovg'a 
-    
-    🔰750 ta taklif - Ibrat Farzandlari qoshidagi loyihalarda volontyorlik imkoniyati
-    
-    🔰500 ta taklif - Iskandar Kamoliddonov bilan JONLI UCHRASHUV va NONUSHTA 
-    
-    🔰300 ta taklif - Ibrat Farzandlari futbolkasi
-    
-    🔰200 ta taklif - Ibrat Farzandlari maxsus sovg'asi (daftar, ruchka, kepka)
-    
-    🔰100 ta taklif - Ibrat Farzandlari loyihasi ofisiga  tur
-    
-    🔰50 ta taklif : IELTS 7+ uchun STUDY PLAN qo'llanmasi
-    
-    
-    ❗️DIQQAT : Sovg'alar intensivdan so'ng egalariga topshiriladi.
-    
-    Sovg'ali o'yinda qatnashish uchun MAXSUS havola olishingiz kerak. Boshlashga tayyormisiz ? 
-    """,
-        reply_markup=get_channel_markup(command.args),
-    )
 
 
 @dp.callback_query()
@@ -114,13 +82,48 @@ async def check_subs_callback(callback: types.CallbackQuery):
             else:
                 functions.add_people(str(callback.message.chat.id), callback.message.chat.full_name)
 
-            with open("assets/iskandar_komoldinov.jpg", "rb") as photo:
-                buff_photo = BufferedInputFile(
-                    file=photo.read(), filename="assets/iskandar_komoldinov.jpg"
-                )
-                await callback.message.answer_photo(
-                    buff_photo,
+            await callback.message.answer(
                     f"""
+🇬🇧Yaqinlaringiz til o'rganishiga sababchi bo'ling va sovg'alarni yutib oling🤩
+
+
+O'yin sharti : Ingliz tiliga qiziqqan do'stlaringizni INTENSIVga taklif qilish.
+
+📌G'oliblarni taklif qilgan do'stlar soniga ko'ra aniqlaymiz.
+
+🔥SOVG'ALAR bilan tanishing : 
+
+🔰10 ta taklif : IELTS 7+ uchun STUDY PLAN qo'llanmasi
+
+🔰50 ta taklif - Ibrat Farzandlari loyihasi ofisiga  tur
+
+🔰100 ta taklif - Ibrat Farzandlari maxsus sovg'asi (daftar, ruchka, kepka) yoki kitob
+
+🔰200 ta taklif - Ibrat Farzandlari futbolkasi
+
+🔰300 ta taklif - Iskandar Komoldinov bilan JONLI UCHRASHUV va NONUSHTA 
+
+🔰500 ta taklif - Ibrat Farzandlari jamoasiga qo'shilish
+
+🔰700 ta taklif - Iskandar Komoldinov tomonidan Londondan sovg'a 
+
+
+
+❗️DIQQAT : Sovg'alar intensivdan so'ng egalariga topshiriladi.
+
+Sovg'ali o'yinda qatnashish uchun MAXSUS havola olishingiz kerak. Boshlashga tayyormisiz ?
+                """,
+                    reply_markup=get_ready_markup(),
+                )
+
+    elif callback.data == "ready":
+        with open("assets/iskandar_komoldinov.jpg", "rb") as photo:
+            buff_photo = BufferedInputFile(
+                file=photo.read(), filename="assets/iskandar_komoldinov.jpg"
+            )
+            await callback.message.answer_photo(
+                buff_photo,
+                f"""
 Do'stim, sizga sovg'am bor🎁
 
 🇬🇧Bilaman, ingliz tiliga qiziqasiz. O'rganishni boshlab yuborgansiz ham!
