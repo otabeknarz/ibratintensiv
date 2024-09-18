@@ -39,3 +39,14 @@ def invite_friend(
     if res.status_code == 200:
         return res.json()
     return False
+
+
+def add_gift_50(people_id: str) -> [requests.Response, False]:
+    res = requests.post(bot_settings.URL + "add-gift-50/", json={"id": people_id})
+    if res.status_code == 201:
+        return res.json()
+    return False
+
+
+def get_stats():
+    return get_req(bot_settings.STATS_URL)

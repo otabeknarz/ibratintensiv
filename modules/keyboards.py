@@ -16,6 +16,15 @@ class Buttons:
             resize_keyboard=True,
         )
 
+        self.main_markup_admin = ReplyKeyboardMarkup(
+            keyboard=[
+                [KeyboardButton(text="🔗 Havola olish")],
+                [KeyboardButton(text="📄 Shaxsiy kabinet")],
+                [KeyboardButton(text="📊 Statistika")],
+            ],
+            resize_keyboard=True,
+        )
+
 
 def get_channel_markup(friend_id: str | int | None) -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(
@@ -37,6 +46,7 @@ def get_channel_markup(friend_id: str | int | None) -> InlineKeyboardMarkup:
             ],
         ]
     )
+
 
 def get_ready_markup():
     return InlineKeyboardMarkup(

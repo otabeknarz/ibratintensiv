@@ -8,8 +8,10 @@ from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart, CommandObject
 from aiogram.types import Message, BufferedInputFile
 from aiogram import types
+from watchdog.observers.fsevents2 import message
 
 from modules.filters import TextEqualsFilter
+from modules.functions import check_is_admin
 from modules.settings import get_settings
 from modules.keyboards import Buttons, get_channel_markup, get_ready_markup
 from modules import functions
@@ -27,6 +29,13 @@ bot = Bot(
 
 @dp.message(CommandStart())
 async def command_start_handler(message: Message, command: CommandObject) -> None:
+    if message.chat.id in bot_settings.ADMINS:
+        await message.answer(
+            "Admin panelga xush kelibsiz",
+            reply_markup=buttons.main_markup_admin,
+        )
+        return
+
     caption = f"""
 Assalomu alaykum, <strong>{message.chat.full_name}</strong>!
 
@@ -46,7 +55,7 @@ So'ng “✅ Obuna bo'ldim” tugmasini bosing shunda shartlarni to'liq bajargan
             message.chat.id,
             buff_photo,
             caption=caption,
-            reply_markup=get_channel_markup(command.args)
+            reply_markup=get_channel_markup(command.args),
         )
 
 
@@ -67,23 +76,35 @@ async def check_subs_callback(callback: types.CallbackQuery):
             if len(callback.data.split(":")) == 2:
                 friend_id = callback.data.split(":")[1]
                 if not functions.invite_friend(
-                        friend_id,
-                        str(callback.message.chat.id),
-                        callback.message.chat.full_name,
+                    friend_id,
+                    str(callback.message.chat.id),
+                    callback.message.chat.full_name,
                 ):
                     functions.add_people(
                         str(callback.message.chat.id), callback.message.chat.full_name
                     )
                 else:
+                    people = functions.get_people(friend_id)
                     await bot.send_message(
                         friend_id,
                         f"Sizning <strong>{callback.message.chat.full_name}</strong> do'stingiz botga qo'shildi.",
                     )
+                    if (
+                        len(people["invited_friends"]) >= 50
+                        and people["has_gift_50"] is False
+                    ):
+                        await bot.send_message(
+                            friend_id,
+                            f"Tabriklaymiz siz 50 ta taklif qilgansiz va sizga sovg'a bor. ",
+                        )
+                        functions.add_gift_50(friend_id)
             else:
-                functions.add_people(str(callback.message.chat.id), callback.message.chat.full_name)
+                functions.add_people(
+                    str(callback.message.chat.id), callback.message.chat.full_name
+                )
 
             await callback.message.answer(
-                    f"""
+                f"""
 🇬🇧Yaqinlaringiz til o'rganishiga sababchi bo'ling va sovg'alarni yutib oling🤩
 
 O'yin sharti : Ingliz tiliga qiziqqan do'stlaringizni INTENSIVga taklif qilish.
@@ -138,8 +159,8 @@ O'yin sharti : Ingliz tiliga qiziqqan do'stlaringizni INTENSIVga taklif qilish.
 
 Sovg'ali o'yinda qatnashish uchun MAXSUS havola olishingiz kerak. Boshlashga tayyormisiz ?
                 """,
-                    reply_markup=get_ready_markup(),
-                )
+                reply_markup=get_ready_markup(),
+            )
 
     elif callback.data == "ready":
         with open("assets/iskandar_komoldinov.jpg", "rb") as photo:
@@ -165,8 +186,8 @@ O'zgarish vaqti keldi❗️
 
 Biz shu yerdamiz: https://t.me/ibratintensiv_bot?start={callback.message.chat.id}
                 """,
-                    reply_markup=buttons.main_markup,
-                )
+                reply_markup=buttons.main_markup,
+            )
             await callback.message.answer(
                 """
 ⬆️ Yuqorida sizning linkingiz qo'shilgan taklifnoma!
@@ -218,6 +239,22 @@ async def dashboard(message: Message):
     await message.answer(
         msg,
         reply_markup=buttons.main_markup,
+    )
+
+
+@dp.message(TextEqualsFilter("📊 Statistika"))
+async def statistics(message: Message):
+    if message.chat.id not in bot_settings.ADMINS:
+        return
+
+    people = functions.get_stats()["people"]
+    msg = ""
+    for key, value in enumerate(people):
+        msg = f"{key + 1}: {value['name']} - {len(value['invited_friends'])} ta taklif qilgan"
+
+    await message.answer(
+        msg,
+        reply_markup=buttons.main_markup_admin,
     )
 
 
