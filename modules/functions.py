@@ -53,4 +53,4 @@ def get_stats():
 
 
 def get_people_ids():
-    return get_req(bot_settings.GET_PEOPLE_IDS).json()
+    return get_req(bot_settings.GET_PEOPLE_IDS)
