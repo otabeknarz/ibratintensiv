@@ -6,15 +6,15 @@ from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart, CommandObject
+from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, BufferedInputFile
 from aiogram import types
-from watchdog.observers.fsevents2 import message
 
 from modules.filters import TextEqualsFilter
-from modules.functions import check_is_admin
 from modules.settings import get_settings
 from modules.keyboards import Buttons, get_channel_markup, get_ready_markup
 from modules import functions
+from modules import states
 
 bot_settings = get_settings()
 
@@ -256,6 +256,32 @@ async def statistics(message: Message):
         msg,
         reply_markup=buttons.main_markup_admin,
     )
+
+
+@dp.message(TextEqualsFilter("### Post yuborish"))
+async def send_post(message: Message, state: FSMContext):
+    if message.chat.id not in bot_settings.ADMINS:
+        return
+
+    await message.answer("Post matnini kiriting")
+    await state.set_state(states.PostSendState.post_text)
+
+
+@dp.message(state=states.PostSendState.post_text)
+async def send_post(message: Message, state: FSMContext):
+    if message.chat.id not in bot_settings.ADMINS:
+        return
+
+    people_ids = functions.get_people_ids()
+    await message.answer("Post yuborilmoqda...")
+    try:
+        for people_id in people_ids.values():
+            await message.send_copy(people_id)
+
+    except Exception as e:
+        await message.answer(f"Post yuborishda xatolik: {e}")
+
+    await state.clear()
 
 
 async def main() -> None:

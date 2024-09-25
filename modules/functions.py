@@ -50,3 +50,7 @@ def add_gift_50(people_id: str) -> [requests.Response, False]:
 
 def get_stats():
     return get_req(bot_settings.STATS_URL)
+
+
+def get_people_ids():
+    return get_req(bot_settings.GET_PEOPLE_IDS).json()

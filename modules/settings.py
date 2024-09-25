@@ -22,6 +22,7 @@ class Settings:
         self.ADD_PEOPLE_URL = self.URL + "add-tg-people/"
         self.GET_PEOPLE_URL = self.URL + "get-tg-people/"
         self.INVITE_TG_FRIEND = self.URL + "invite-tg-friend/"
+        self.GET_PEOPLE_IDS = self.URL + "get-people-ids/"
 
 
 @lru_cache
