@@ -267,7 +267,7 @@ async def send_post(message: Message, state: FSMContext):
     await state.set_state(states.PostSendState.post_text)
 
 
-@dp.message(state=states.PostSendState.post_text)
+@dp.message(states.PostSendState.post_text)
 async def send_post(message: Message, state: FSMContext):
     if message.chat.id not in bot_settings.ADMINS:
         return
