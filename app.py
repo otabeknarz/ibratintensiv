@@ -89,15 +89,7 @@ async def check_subs_callback(callback: types.CallbackQuery):
                         friend_id,
                         f"Sizning <strong>{callback.message.chat.full_name}</strong> do'stingiz botga qo'shildi.",
                     )
-                    if (
-                        len(people["invited_friends"]) >= 50
-                        and people["has_gift_50"] is False
-                    ):
-                        await bot.send_message(
-                            friend_id,
-                            f"Tabriklaymiz siz 50 ta taklif qilgansiz va sizga sovg'a bor. ",
-                        )
-                        functions.add_gift_50(friend_id)
+
             else:
                 functions.add_people(
                     str(callback.message.chat.id), callback.message.chat.full_name
