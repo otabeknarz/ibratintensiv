@@ -252,7 +252,7 @@ async def statistics(message: Message):
 
 @dp.message(TextEqualsFilter("### Post yuborish"))
 async def send_post(message: Message, state: FSMContext):
-    if message.chat.id not in bot_settings.ADMINS:
+    if message.chat.id not in bot_settings.ADMINS.values():
         return
 
     await message.answer("Post matnini kiriting")
