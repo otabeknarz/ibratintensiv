@@ -261,7 +261,7 @@ async def send_post(message: Message, state: FSMContext):
 
 @dp.message(states.PostSendState.post_text)
 async def send_post(message: Message, state: FSMContext):
-    if message.chat.id not in bot_settings.ADMINS:
+    if message.chat.id not in bot_settings.ADMINS.values():
         return
 
     people_ids = functions.get_people_ids()
