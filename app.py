@@ -267,7 +267,7 @@ async def send_post(message: Message, state: FSMContext):
     people_ids = functions.get_people_ids()
     await message.answer("Post yuborilmoqda...")
     try:
-        for people_id in people_ids.values():
+        for people_id in people_ids["people"].values():
             await message.send_copy(people_id)
 
     except Exception as e:
