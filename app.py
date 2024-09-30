@@ -284,7 +284,7 @@ async def send_gifts(message: Message):
 
     await message.answer("Sovg'alar yuborish boshlandi...")
 
-    people = functions.get_people_ids()["people"]
+    people = functions.has_invited_people_ids()["people"]
     for people_id, people_name in people:
         link = await bot.create_chat_invite_link(
             bot_settings.GIFT_GROUP, member_limit=1
