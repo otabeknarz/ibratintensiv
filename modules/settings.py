@@ -14,7 +14,8 @@ class Settings:
             "Umida": 1499657324,
         }
 
-        self.CHANNEL = -1002219808170
+        self.CHANNEL = os.getenv("CHANNEL")
+        self.GIFT_GROUP = os.getenv("GIFT_GROUP")
 
         # URLs
         self.URL = "https://otabek.me/ibrat/"
@@ -23,6 +24,7 @@ class Settings:
         self.GET_PEOPLE_URL = self.URL + "get-tg-people/"
         self.INVITE_TG_FRIEND = self.URL + "invite-tg-friend/"
         self.GET_PEOPLE_IDS = self.URL + "get-people-ids/"
+        self.HAS_INVITED_PEOPLE_IDS = self.URL + "has-invited-people-ids"
 
 
 @lru_cache
