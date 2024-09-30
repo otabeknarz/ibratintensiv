@@ -54,3 +54,13 @@ def get_stats():
 
 def get_people_ids():
     return get_req(bot_settings.GET_PEOPLE_IDS)
+
+
+def has_invited_people_ids(greater_than: int = 10):
+    return get_req(
+        bot_settings.HAS_INVITED_PEOPLE_IDS + f"?greater_than={greater_than}"
+    )
+
+
+def set_true_10(id: int):
+    return post_req(bot_settings.URL + "set-true-10/", {"id": id})
