@@ -1,6 +1,7 @@
 import asyncio
 import logging
 import sys
+import time
 
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
@@ -274,6 +275,43 @@ async def send_post(message: Message, state: FSMContext):
         await message.answer(f"Post yuborishda xatolik: {e}")
 
     await state.clear()
+
+
+@dp.message(TextEqualsFilter("### Sovg'alarni yuborish"))
+async def send_gifts(message: Message):
+    if message.chat.id not in bot_settings.ADMINS.values():
+        return
+
+    await message.answer("Sovg'alar yuborish boshlandi...")
+
+    people = functions.get_people_ids()["people"]
+    for people_id, people_name in people:
+        link = await bot.create_chat_invite_link(
+            bot_settings.GIFT_GROUP, member_limit=1
+        )
+        text = f"""
+Assalomu Alaykum <strong>{people_name}</strong>!,
+
+Ibrat Farzandlari loyihasi tomonidan tashkil etilgan Ibrat Intensiv sovg'alar tanlovida g'olib bo'lganingiz bilan tabriklaymiz🤩
+
+Quyida siz  uchun maxsus sovg'a tayyorladik. Sovg'ani olish uchun link ustiga bosing🎁
+
+👉 {link.invite_link}
+        """
+
+        try:
+            await bot.send_message(people_id, text)
+
+        except Exception as e:
+            await message.answer(
+                f"{people_id} - {people_name} ga sovg'a yuborishda xatolik: {e}"
+            )
+
+        finally:
+            functions.set_true_10(people_id)
+            await message.answer(f"{people_id} - {people_name} ga sovg'a yuborildi")
+
+        await asyncio.sleep(2)
 
 
 async def main() -> None:
